@@ -1,0 +1,51 @@
+# configs/sft_config.yaml
+model:
+  model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+  quantization:
+    load_in_8bit: true
+    bnb_8bit_compute_dtype: float16
+
+lora:
+  rank: 16
+  alpha: 32
+  target_modules:
+    - "q_proj"
+    - "v_proj"
+    - "k_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  dropout: 0.05
+  bias: "none"
+
+training:
+  output_dir: "models/sft_ckpt"
+  num_train_epochs: 3
+  per_device_train_batch_size: 64
+  per_device_eval_batch_size: 64
+  gradient_accumulation_steps: 4
+  learning_rate: 1.5e-4
+  warmup_steps: 100
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 250
+  evaluation_strategy: "steps"
+  save_strategy: "steps"
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_exact_match"
+  greater_is_better: true
+  fp16: true
+  gradient_checkpointing: true
+  max_grad_norm: 1.0
+  optim: "adamw_8bit"
+
+data:
+  train_path: "datasets/train.jsonl"
+  val_path: "datasets/val.jsonl"
+  max_length: 2048
+  
+logging:
+  report_to: ["wandb", "tensorboard"]
+  run_name: "spatial_vlm_sft"
+  project_name: "spatial_vlm"

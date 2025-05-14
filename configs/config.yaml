@@ -1,0 +1,52 @@
+# Main Configuration for VQASynth Pipeline
+
+dataset:
+  output_dir: "datasets/"
+  cache_dir: ".cache/"
+
+vqasynth:
+  # Depth estimation
+  depth:
+    model: "VGGT"  # Options: "ZoeDepth", "VGGT"
+    device: "cuda"
+    batch_size: 32
+    
+  # Segmentation
+  segmentation:
+    model: "SAM2"  # Options: "SAM", "SAM2"
+    device: "cuda"
+    
+  # Object detection and captioning
+  captioning:
+    model: "Molmo" # Options: "Molmo", "Florence-2"
+    device: "cuda"
+    
+  # Scene fusion
+  scene_fusion:
+    max_objects: 10
+    min_object_area: 1000
+    
+  # Prompting
+  prompting:
+    templates_file: "configs/templates.yaml"
+    cot_enabled: True
+    balance_relations: True
+
+dataset_generation:
+  num_train: 180000
+  num_val: 5000
+  num_test: 5000
+  max_questions_per_image: 20
+  
+  # Task ratios
+  task_ratios:
+    2d_spatial: 0.34
+    3d_depth: 0.33
+    3d_distance: 0.33
+    
+  # Relation groups to ensure balance
+  relation_groups:
+    - ["left", "right"]  # Horizontal 2D
+    - ["above", "below"]  # Vertical 2D
+    - ["in front of", "behind"]  # Depth ordering
+    - ["closer", "farther"]  # Relative distance

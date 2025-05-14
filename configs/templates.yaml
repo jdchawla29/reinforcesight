@@ -1,0 +1,21 @@
+# data_gen/templates.yaml
+2d_spatial:
+  - "What is the spatial relationship between the {obj1} and the {obj2}?"
+  - "Where is the {obj1} located relative to the {obj2}?"
+  - "Is the {obj1} to the left, right, above, or below the {obj2}?"
+  - "In relation to the {obj2}, where can I find the {obj1}?"
+  - "Describe the position of the {obj1} with respect to the {obj2}."
+
+3d_depth:
+  - "Which object is closer to the camera: the {obj1} or the {obj2}?"
+  - "Is the {obj1} in front of or behind the {obj2}?"
+  - "Between the {obj1} and the {obj2}, which one appears nearer?"
+  - "Considering depth, is the {obj1} before or after the {obj2}?"
+  - "Which is further away: the {obj1} or the {obj2}?"
+
+3d_distance:
+  - "Relative to the {ref}, which is closer: the {obj1} or the {obj2}?"
+  - "From the perspective of the {ref}, is the {obj1} nearer than the {obj2}?"
+  - "Which object is farther from the {ref}: the {obj1} or the {obj2}?"
+  - "Considering the {ref} as reference, which is more distant: the {obj1} or the {obj2}?"
+  - "Between the {obj1} and the {obj2}, which one is closer to the {ref}?"

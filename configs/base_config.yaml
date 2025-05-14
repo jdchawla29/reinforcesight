@@ -1,0 +1,33 @@
+# Base configuration shared between SFT and GRPO
+
+model:
+  model_id: "Qwen/Qwen2.5-VL-3B-Instruct"
+  use_flash_attention: true
+  trust_remote_code: true
+
+data:
+  dataset_dir: "datasets/"
+  train_path: "datasets/train.jsonl"
+  val_path: "datasets/val.jsonl"
+  test_path: "datasets/test.jsonl"
+  max_length: 2048
+  image_size: [336, 336]
+  image_column: "image_path"
+  
+system:
+  seed: 42
+  mixed_precision: "fp16"
+  device: "cuda"
+  
+logging:
+  report_to: ["wandb", "tensorboard"]
+  run_name: "spatial_vlm"
+  project_name: "spatial_vlm"
+  log_dir: "reports/"
+  tb_dir: "reports/tensorboard"
+  wandb_dir: "reports/wandb"
+  
+paths:
+  output_dir: "models/"
+  sft_checkpoint: "models/sft_ckpt"
+  grpo_checkpoint: "models/grpo_ckpt"
